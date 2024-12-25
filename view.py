@@ -4,21 +4,21 @@ import time
 class View:
     def show_menu(self):
         while True:
-            print("Меню:")
-            print("1. Вивід назв таблиць")
-            print("2. Вивід імен стовпчиків таблиці")
-            print("3. Внесення даних в таблицю")
-            print("4. Редагування даних в таблиці")
-            print("5. Вилучення даних в таблиці")
-            print("6. Генерування даних в таблицю")
-            print("7. Вихід")
+            print("Menu:")
+            print("1. Output table names")
+            print("2. Output table column names")
+            print("3. Entering data into a table")
+            print("4. Editing data in a table")
+            print("5. Extracting data in a table")
+            print("6. Generating random data into a table")
+            print("7. Exit")
 
-            choice = input("Зробіть вибір: ")
+            choice = input("Make a choice: ")
 
             if choice in ('1', '2', '3', '4', '5', '6', '7'):
                 return choice
             else:
-                print("Будь ласка, введіть правильний номер опції (від 1 до 7)")
+                print("Enter the correct option number (1 to 7)")
                 time.sleep(2)
 
     def show_message(self, message):
@@ -26,21 +26,21 @@ class View:
         time.sleep(2)
 
     def ask_continue(self):
-        agree = input("Продовжити внесення змін? (y/n) ")
+        agree = input("Continue making changes? (y/n) ")
         return agree
 
     def show_tables(self, tables):
-        print("Назви таблиць:")
+        print("Table names:")
         for table in tables:
             print(table)
         time.sleep(2)
 
     def ask_table(self):
-        table_name = input("Введіть назву таблиці: ")
+        table_name = input("Enter the table name: ")
         return table_name
 
     def show_columns(self, columns):
-        print("Назви стовпців:")
+        print("Column names:")
         for column in columns:
             print(column)
         time.sleep(2)
@@ -48,12 +48,12 @@ class View:
     def insert(self):
         while True:
             try:
-                table = input("Введіть назву таблиці: ")
-                columns = input("Введіть назви колонок (через пробіл): ").split()
-                val = input("Введіть відповідні значення (через пробіл): ").split()
+                table = input("Enter the table name: ")
+                columns = input("Enter column names (separated by a space): ").split()
+                val = input("Enter the appropriate values (separated by a space): ").split()
 
                 if len(columns) != len(val):
-                    raise ValueError("Кількість стовпців повинна бути дорівнювати кількості значень.")
+                    raise ValueError("The number of columns must be equal to the number of values")
 
                 return table, columns, val
             except ValueError as e:
@@ -62,10 +62,10 @@ class View:
     def update(self):
         while True:
             try:
-                table = input("Введіть назву таблиці: ")
-                column = input("Введіть назву колонки, яку хочете змінити: ")
-                id = int(input("Введіть ID рядка, який потрібно змінити: "))
-                new_value = input("Введіть нове значення: ")
+                table = input("Enter the table name: ")
+                column = input("Enter the name of the column you want to change: ")
+                id = int(input("Enter the ID of the row you want to change: "))
+                new_value = input("Enter a new value: ")
                 return table, column, id, new_value
             except ValueError as e:
                 print(f"Помилка: {e}")
@@ -73,8 +73,8 @@ class View:
     def delete(self):
         while True:
             try:
-                table = input("Введіть назву таблиці: ")
-                id = int(input("Введіть ID рядка, який потрібно видалити: "))
+                table = input("Enter the table name: ")
+                id = int(input("Enter the ID of the row you want to delete: "))
                 return table, id
             except ValueError as e:
                 print(f"Помилка: {e}")
@@ -82,8 +82,8 @@ class View:
     def generate_data_input(self):
         while True:
             try:
-                table_name = input("Введіть назву таблиці: ")
-                num_rows = int(input("Введіть кількість рядків для генерації: "))
+                table_name = input("Enter the table name: ")
+                num_rows = int(input("Enter the number of rows to generate: "))
                 return table_name, num_rows
             except ValueError as e:
                 print(f"Помилка: {e}")
