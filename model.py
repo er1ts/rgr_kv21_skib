@@ -12,15 +12,18 @@ class Model:
             port=5432
         )
 
-    def get_all_tables(self):
-        c = self.conn.cursor()
-        c.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
-        return c.fetchall()
+
 
     def get_all_columns(self, table_name):
         c = self.conn.cursor()
         c.execute("SELECT column_name FROM information_schema.columns WHERE table_name = %s", (table_name,))
         return c.fetchall()
+
+    def get_all_tables(self):
+        c = self.conn.cursor()
+        c.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
+        return c.fetchall()
+
 
     def add_data(self, table_name, columns, val):
         c = self.conn.cursor()
@@ -159,9 +162,9 @@ class Model:
                 elif column_type == 'character varying':
                     select_subquery += f"'Text {column_name}',"
                 elif column_type == 'date':
-                    select_subquery += "'2022-01-01',"
+                    select_subquery += "'2023-01-01',"
                 elif column_type == 'timestamp with time zone':
-                    select_subquery += "'2022-01-01 08:30:00+03',"
+                    select_subquery += "'2023-01-01 08:30:00+03',"
                 else:
                     continue
 
