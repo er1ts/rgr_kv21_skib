@@ -9,9 +9,9 @@ class Controller:
         self.view = View()
         try:
             self.model = Model()
-            self.view.show_message("Підключено до бази даних")
+            self.view.show_message("Connected to database")
         except Exception as e:
-            self.view.show_message(f"Сталася помилка під час ініціалізації: {e}")
+            self.view.show_message(f"An error occurred during initialization: {e}")
             sys.exit(1)
 
     def run(self):
@@ -46,17 +46,17 @@ class Controller:
             table, columns, val = self.view.insert()
             error = self.model.add_data(table, columns, val)
             if int(error) == 1:
-                self.view.show_message("Дані додано успішно!")
+                self.view.show_message("Data added successfully")
                 agree = self.view.ask_continue()
                 if agree == 'n':
                     break
             elif int(error) == 2:
-                self.view.show_message("Унікальний ідентифікатор вже існує!")
+                self.view.show_message("Unique identifier already exists")
                 agree = self.view.ask_continue()
                 if agree == 'n':
                     break
             else:
-                self.view.show_message("Недійсний зовнішній ключ")
+                self.view.show_message("Invalid foreign key")
                 agree = self.view.ask_continue()
                 if agree == 'n':
                     break
@@ -66,17 +66,17 @@ class Controller:
             table, column, id, new_value = self.view.update()
             error = self.model.update_data(table, column, id, new_value)
             if int(error) == 1:
-                self.view.show_message("Дані оновлено успішно!")
+                self.view.show_message("Data updated successfully")
                 agree = self.view.ask_continue()
                 if agree == 'n':
                     break
             elif int(error) == 2:
-                self.view.show_message(f"Унікальний ідентифікатор {new_value} вже існує!")
+                self.view.show_message(f"Unique identifier {new_value} already exists!")
                 agree = self.view.ask_continue()
                 if agree == 'n':
                     break
             else:
-                self.view.show_message(f"Недійсний зовнішній ключ {new_value} у колонці {column}")
+                self.view.show_message(f"Invalid foreign key {new_value} in the column {column}")
                 agree = self.view.ask_continue()
                 if agree == 'n':
                     break
@@ -86,12 +86,12 @@ class Controller:
             table, id = self.view.delete()
             error = self.model.delete_data(table, id)
             if int(error) == 1:
-                self.view.show_message("Рядок видалено успішно!")
+                self.view.show_message("Row deleted successfully!")
                 agree = self.view.ask_continue()
                 if agree == 'n':
                     break
             else:
-                self.view.show_message("Неможливо видалити рядок, оскільки існують зв\'язані дані")
+                self.view.show_message("Cannot delete row because there is related data")
                 agree = self.view.ask_continue()
                 if agree == 'n':
                     break
@@ -99,4 +99,4 @@ class Controller:
     def generate_data(self):
         table_name, num_rows = self.view.generate_data_input()
         self.model.generate_data(table_name, num_rows)
-        self.view.show_message(f"Дані для таблиці {table_name} були згенеровані успішно")
+        self.view.show_message(f"Data for the table {table_name} were generated successfully")
